@@ -383,23 +383,58 @@ public class ex0b {
 
 
 
+			double temp;
 			Scanner s = new Scanner(System.in);
 			System.out.println("press 1 if you want to filter by location");
 			int w = s.nextInt();
 			isByLocation = (w==1);
-			if(isByLocation){
-
-
-
+			if(isByLocation){          // don't working.
+				System.out.println("enter lat and lon of one point of location(enter lat ,press space and enter the lon)");
+				double lat1=s.nextDouble();
+				double lon1=s.nextDouble();
+				System.out.println("enter lat and lon of other point of location(enter lat ,press space and enter the lon)");
+				double lat2=s.nextDouble();
+				double lon2=s.nextDouble();
+				if(lat1>lat2){
+					temp=lat2;
+					lat2=lat1;
+					lat1=temp;
+				}
+				if(lon1>lon2){
+					temp=lon2;
+					lon2=lon1;
+					lon1=temp;
+				}
+				int LATIndex = 0;
+				for (int i = 0; i < mat[0].length; i++) {///////////////////////////////////////////////////////////
+					if(mat[i][0].equals("Latitude")){
+						LATIndex = i;
+						break;
+					}
+				}
+				int LONIndex = 0;
+				for (int i = 0; i < mat[0].length; i++) {///////////////////////////////////////////////////////////
+					if(mat[i][0].equals("Longitude")){
+						LONIndex = i;
+						break;
+					}
+				}
+				for (int i = 1; i < mat.length; i++) {
+					if(Integer.parseInt(mat[i][LATIndex])>lat1&&Integer.parseInt(mat[i][LATIndex])<lat2&&Integer.parseInt(mat[i][LONIndex])>lon1&&Integer.parseInt(mat[i][LONIndex])<lat2)
+						filtered[i]=true;
+					else
+						filtered[i]=false;
+						
+				}
 
 
 			}
-			else{
+			else{  // i'm don't understand the format.
 				System.out.println("press 1 if you want to filter by time");
 				w = s.nextInt();
 				isByTime = (w==1);
 				if(isByTime){
-
+					
 
 
 
@@ -414,7 +449,7 @@ public class ex0b {
 						System.out.println("Enter the ID: ");
 						String id = s.nextLine();
 						int IdIndex = 0;
-						for (int i = 0; i < mat[0].length; i++) {
+						for (int i = 0; i < mat[0].length; i++) {///////////////////////////////////////////////////////////
 							if(mat[0][i].equals("ID")){
 								IdIndex = i;
 								break;
